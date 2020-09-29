@@ -38,7 +38,7 @@ public class MyWebSocketClient  extends WebSocketClient {
         log.info("onError start, message: {}", e.getMessage());
     }
 
-    public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
+    public static void main(String[] args) {
         final Message message = new Message();
         message.setModel(LongPollConstants.MODEL_ONE_TO_GROUP);
         message.setGroupId("group_1");
@@ -47,7 +47,7 @@ public class MyWebSocketClient  extends WebSocketClient {
             @SneakyThrows
             @Override
             public void run() {
-                final URI uri = new URI("ws://localhost:8080/v1/smartlife_long_poll/send_msg?groupId=group_1&uid=uid_1");
+                final URI uri = new URI("ws://localhost:8080/v1/ws/message?groupId=group_1&uid=uid_1");
                 MyWebSocketClient client1 = new MyWebSocketClient(uri);
                 client1.connect();
                 message.setSenderUid("uid_1");
@@ -60,7 +60,7 @@ public class MyWebSocketClient  extends WebSocketClient {
             @SneakyThrows
             @Override
             public void run() {
-                final URI uri = new URI("ws://localhost:8081/v1/smartlife_long_poll/send_msg?groupId=group_1&uid=uid_2");
+                final URI uri = new URI("ws://localhost:8081/v1/ws/message?groupId=group_1&uid=uid_2");
                 MyWebSocketClient client2 = new MyWebSocketClient(uri);
                 client2.connect();
                 message.setSenderUid("uid_2");
